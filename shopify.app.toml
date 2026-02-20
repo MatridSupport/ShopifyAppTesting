@@ -2,7 +2,7 @@
 
 client_id = "77a9b0074ae367f9006f30a4e3df1617"
 name = "custom-app"
-application_url = "https://example.com"
+application_url = "https://shopifyapptesting-production.up.railway.app/"
 embedded = true
 
 [build]
@@ -25,4 +25,4 @@ api_version = "2026-04"
 scopes = "write_products"
 
 [auth]
-redirect_urls = [ "https://example.com/api/auth" ]
+redirect_urls = [ https://shopifyapptesting-production.up.railway.app/api/auth" ]
