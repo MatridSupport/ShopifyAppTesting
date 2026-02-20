@@ -1,12 +1,13 @@
 import prisma from "../db.server";
-import { json } from "@react-router/node";
 
 export async function loader() {
   const records = await prisma.contactForm.findMany({
     orderBy: { createdAt: "desc" },
   });
 
-  return json({ records });
+  return new Response(JSON.stringify({ records }), {
+    headers: { "Content-Type": "application/json" },
+  });
 }
 
 export async function action({ request }) {
