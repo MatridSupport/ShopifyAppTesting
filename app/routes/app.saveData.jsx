@@ -1,3 +1,5 @@
 export default function saveData(){
-    <div>ALL RECORDS</div>
+    return (
+        <div>ALL RECORDS</div>
+    ); 
 }
