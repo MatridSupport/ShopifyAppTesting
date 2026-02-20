@@ -1,18 +1,27 @@
-import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
-import prisma from "../db.server"; // adjust path if needed
+import { useEffect, useState } from "react";
 
-// Loader fetches all records from ContactForm table
-export async function loader() {
-  const records = await prisma.contactForm.findMany({
-    orderBy: { createdAt: "desc" },
-  });
-  return json({ records });
-}
-
-// React component displays the records
 export default function SaveData() {
-  const { records } = useLoaderData();
+  const [records, setRecords] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch manually from your API
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch("/api/save-form"); // make sure this endpoint returns all saved records
+        const data = await res.json();
+        setRecords(data.records || []);
+      } catch (err) {
+        console.error("Error fetching records:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <div style={{ padding: 20 }}>
